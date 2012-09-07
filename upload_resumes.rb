@@ -7,9 +7,8 @@ require 'json'
 
 
 class UploadResumes
-  def initialize(csv_name, start_id, session_id, p, version, username, password)
+  def initialize(csv_name, session_id, p, version, username, password)
     @csv_name = csv_name
-    @start_id = start_id
     @session_id = session_id
     @p = p
     @version = version
@@ -61,7 +60,7 @@ class UploadResumes
     puts message.to_json
     path = "/synapserWait?applicationCode=iats&version=#{@version}&pageSessionId=#{@session_id}"
     headers = {
-    'Cookie' => "hsfirstvisit=http%3A%2F%2Fwww.thoughtworks.com%2F||2012-07-13%2011%3A20%3A29; SESS06ea2a41f72d31b93a5853105dc11e35=p3gc8p982svnjhd8pt2sip51q6; hubspotvm=a1ba202e2f26c8bd352dd013ef413a4c; __utma=90591199.121073808.1342192823.1344441875.1345059808.3; __utmc=90591199; __utmz=90591199.1345059808.3.2.utmcsr=reddit.com|utmccn=(referral)|utmcmd=referral|utmcct=/r/technology/comments/y9ypp/from_bits_to_gits_github_thoughtworks_ny_august/; __ptca=161445794.cYMBtHfFuRxq.1342210829.1344459879.1345074210.3; __ptv_64rZ77=cYMBtHfFuRxq; __pti_64rZ77=cYMBtHfFuRxq; __ptcc=1; __ptcz=161445794.1342210829.1.0.ptmcsr=thoughtworks.com|ptmcmd=referral|ptmccn=(referral)|ptmctr=%2F; __hstc=161445794.a1ba202e2f26c8bd352dd013ef413a4c.1342192829329.1344441878714.1345059809892.3; __hssrc=1; hubspotutk=a1ba202e2f26c8bd352dd013ef413a4c; formCompletionSESSID=mg91m98p2kja3jbdp5mgce1550; formCompletionPublicSessionName=UWInnlXfPh8bdalazr5QQ36Ch2D1KkMp7vvj7APolETHLy2e0AbdHaJL2VLrg0NCKigInoV5b1MVlaGGdXuPk8BwS8JOzM5YDDYF46jQNjOxB956vCBYW3vMdWWCHKHX; relayState=; iatsSharedSESSID=3i39ilt7ek3j97fq1iuf8pkqs6; iatsSharedPublicSessionName=#{@p}",
+    'Cookie' => "hsfirstvisit=http%3A%2F%2Fwww.thoughtworks.com%2F||2012-07-13%2011%3A20%3A29; __utma=90591199.121073808.1342192823.1344441875.1345059808.3; __utmc=90591199; __utmz=90591199.1345059808.3.2.utmcsr=reddit.com|utmccn=(referral)|utmcmd=referral|utmcct=/r/technology/comments/y9ypp/from_bits_to_gits_github_thoughtworks_ny_august/; __ptca=161445794.cYMBtHfFuRxq.1342210829.1344459879.1345074210.3; __ptv_64rZ77=cYMBtHfFuRxq; __pti_64rZ77=cYMBtHfFuRxq; __ptcc=1; __ptcz=161445794.1342210829.1.0.ptmcsr=thoughtworks.com|ptmcmd=referral|ptmccn=(referral)|ptmctr=%2F; __hstc=161445794.a1ba202e2f26c8bd352dd013ef413a4c.1342192829329.1344441878714.1345059809892.3; __hssrc=1; hubspotutk=a1ba202e2f26c8bd352dd013ef413a4c; formCompletionSESSID=jpo40l0eoqqk740nlutp5f0r16; formCompletionPublicSessionName=EmSUpW1FAxnsobHwkmDg9Ys6nxsj; relayState=; iatsSharedSESSID=k3laclu9vmgcdbdim98edcnlu6; iatsSharedPublicSessionName=#{@p}",
     'Content-Type' => 'application/json'
     }
     data=nil
@@ -80,7 +79,8 @@ end
 # if you're logged in this should work fine. note that the session id changes periodically, the version changes less often. daily? "p" changes on login I think.
 # you'll probably also want a fresh copy of the cookie.
 #arg 0 is the csv
-#note: you'll need to clear out all previously imported resumes. 2012: RES-12-742 (Ruchi Goel) was the last processed
-uploader = UploadResumes.new(ARGV[0], ARGV[1], "1549845839", "zsxN_zisefA2uuv0sMVX4WKFwe7s", "755aa1", "username", "password")
+#open the csv in textmate and save it as iso-8859-1 (windows) [or figure out what the right character replacement sequence is in vi?]
+#note: you'll need to clear out all previously imported resumes. 2012: RES-12-827 (Agarwal, Aakriti) was the last processed
+uploader = UploadResumes.new(ARGV[0], "2067508047", "YgTvZrbrq5O5lX6Jon_8LntsqJX4", "bbfe68", "username", "password")
 uploader.convert
 uploader.upload
